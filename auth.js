@@ -24,25 +24,7 @@ const forgotPassword =
    REDIRECT
 ================================ */
 
-/*
-   Atomik is hosted inside the
-   /atomik-frontend/ GitHub Pages folder.
-
-   Keep this relative because auth.html
-   and index.html are in the same folder.
-*/
-
 const HOME_PAGE = "index.html";
-
-
-/*
-   This is the actual deployed
-   authentication page.
-
-   Do NOT use window.location.origin
-   here because that would remove
-   /atomik-frontend/.
-*/
 
 const AUTH_REDIRECT_URL =
     "https://anyantifamily-commits.github.io/atomik-frontend/auth.html";
@@ -98,12 +80,6 @@ async function checkExistingSession() {
         return;
     }
 
-    /*
-       If the user is already signed in,
-       there is no reason to show the
-       login page again.
-    */
-
     if (session) {
 
         window.location.replace(
@@ -126,11 +102,10 @@ supabase.auth.onAuthStateChange(
         );
 
         /*
-           When Supabase finishes handling
-           an email confirmation redirect,
-           the user may receive a session.
+           Supabase can create a session when
+           the user confirms their email.
 
-           Send them to the homepage.
+           Once that happens, send them home.
         */
 
         if (
@@ -148,81 +123,133 @@ supabase.auth.onAuthStateChange(
 
 
 /* ================================
-   CHECK URL AUTH RESULT
+   HANDLE AUTH CALLBACK
 ================================ */
 
-function checkAuthRedirect() {
+async function handleAuthCallback() {
+
+    /*
+       Supabase confirmation links normally
+       contain authentication information
+       in the URL.
+
+       We let Supabase process the URL first
+       because detectSessionInUrl is enabled
+       in supabase.js.
+    */
 
     const hash =
         window.location.hash;
 
-    if (!hash) {
-        return;
+    const search =
+        window.location.search;
+
+    const hasAuthHash =
+        hash.includes("access_token") ||
+        hash.includes("refresh_token") ||
+        hash.includes("error=");
+
+    const hasAuthCode =
+        search.includes("code=");
+
+    if (
+        !hasAuthHash &&
+        !hasAuthCode
+    ) {
+        return false;
     }
 
-    const params =
-        new URLSearchParams(
-            hash.substring(1)
-        );
+    console.log(
+        "Supabase authentication callback detected."
+    );
 
-    const error =
-        params.get("error");
+    /*
+       Give the Supabase client a moment to
+       process the authentication URL.
+    */
 
-    const errorDescription =
-        params.get(
-            "error_description"
-        );
+    await new Promise(
+        resolve => setTimeout(resolve, 500)
+    );
+
+
+    const {
+        data: { session },
+        error
+    } =
+        await supabase.auth.getSession();
+
 
     if (error) {
 
         console.error(
-            "Authentication redirect error:",
-            errorDescription || error
+            "Callback session error:",
+            error
         );
 
         showMessage(
-            errorDescription ||
-            "Email confirmation could not be completed.",
+            "We couldn't complete the email confirmation. Please try again.",
             "error"
         );
 
-        /*
-           Remove the sensitive/auth
-           information from the address bar.
-        */
-
-        window.history.replaceState(
-            {},
-            document.title,
-            window.location.pathname
-        );
-
-        return;
+        return true;
     }
 
-    /*
-       If access information exists,
-       Supabase's client will process it
-       automatically because
-       detectSessionInUrl is enabled.
-    */
 
-    if (
-        params.has("access_token") ||
-        params.has("refresh_token")
-    ) {
+    if (session) {
+
+        console.log(
+            "Authentication session established."
+        );
 
         showMessage(
             "Email confirmed successfully. Welcome to Atomik!",
             "success"
         );
 
-        window.history.replaceState(
-            {},
-            document.title,
-            window.location.pathname
+        /*
+           Give the user a short moment to see
+           the success message before entering
+           the app.
+        */
+
+        setTimeout(
+            () => {
+
+                window.history.replaceState(
+                    {},
+                    document.title,
+                    window.location.pathname
+                );
+
+                window.location.replace(
+                    HOME_PAGE
+                );
+
+            },
+            700
         );
+
+        return true;
     }
+
+
+    /*
+       If the callback existed but Supabase
+       did not create a session, don't pretend
+       that confirmation succeeded.
+    */
+
+    console.warn(
+        "Authentication callback detected but no session was created."
+    );
+
+    showMessage(
+        "Your email confirmation was received, but we couldn't create your login session. Please try signing in again.",
+        "error"
+    );
+
+    return true;
 }
 
 
@@ -230,8 +257,30 @@ function checkAuthRedirect() {
    INITIALIZE AUTH PAGE
 ================================ */
 
-checkAuthRedirect();
-checkExistingSession();
+async function initializeAuthPage() {
+
+    /*
+       Handle a confirmation/reset callback
+       before doing the normal session check.
+    */
+
+    const callbackHandled =
+        await handleAuthCallback();
+
+    /*
+       If a callback was handled, don't run
+       the normal session redirect immediately.
+    */
+
+    if (callbackHandled) {
+        return;
+    }
+
+    await checkExistingSession();
+}
+
+
+initializeAuthPage();
 
 
 /* ================================
@@ -437,15 +486,8 @@ signupForm.addEventListener(
                             name: name
                         },
 
-                        /*
-                           IMPORTANT:
-                           Use the full deployed
-                           GitHub Pages path.
-                        */
-
                         emailRedirectTo:
                             AUTH_REDIRECT_URL
-
                     }
 
                 });
@@ -656,11 +698,6 @@ forgotPassword.addEventListener(
                     .resetPasswordForEmail(
                         email,
                         {
-                            /*
-                               Use the full deployed
-                               GitHub Pages path.
-                            */
-
                             redirectTo:
                                 AUTH_REDIRECT_URL
                         }
