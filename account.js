@@ -87,26 +87,23 @@ const params =
         window.location.search
     );
 
-const payment =
-    params.get("payment");
+/*
+ * Paystack returns the transaction
+ * reference in the callback URL.
+ */
 
 const reference =
     params.get("reference");
-
 
 /*
  * Nothing to do when the user
  * simply visits account.html.
  */
 
-if (
-    payment !== "success" ||
-    !reference
-) {
+if (!reference) {
 
     return;
 }
-
 
 if (accountMessage) {
 
@@ -114,20 +111,17 @@ if (accountMessage) {
         "Verifying your Paystack payment...";
 }
 
-
 if (planLabel) {
 
     planLabel.textContent =
         "VERIFYING PAYMENT...";
 }
 
-
 if (planDescription) {
 
     planDescription.textContent =
         "Please wait while we confirm your subscription.";
 }
-
 
 try {
 
@@ -136,14 +130,12 @@ try {
     } =
         await supabase.auth.getSession();
 
-
     if (!session?.access_token) {
 
         throw new Error(
             "Your Atomik session has expired. Please sign in again."
         );
     }
-
 
     const response =
         await fetch(
@@ -158,9 +150,7 @@ try {
             }
         );
 
-
     let data = null;
-
 
     try {
 
@@ -172,7 +162,6 @@ try {
         data = null;
     }
 
-
     if (!response.ok) {
 
         throw new Error(
@@ -180,7 +169,6 @@ try {
             "Unable to verify your payment."
         );
     }
-
 
     if (
         !data?.success ||
@@ -193,7 +181,6 @@ try {
         );
     }
 
-
     /*
      * Payment has been verified by
      * the Atomik backend.
@@ -204,7 +191,6 @@ try {
         accountMessage.textContent =
             "Payment verified successfully. Your Premium plan is now active.";
     }
-
 
     /*
      * Remove the payment query
@@ -217,14 +203,12 @@ try {
         "account.html"
     );
 
-
     /*
      * Reload usage so the page
      * immediately reflects Premium.
      */
 
     await loadUsage();
-
 
 } catch (error) {
 
@@ -233,14 +217,12 @@ try {
         error
     );
 
-
     if (accountMessage) {
 
         accountMessage.textContent =
             error?.message ||
             "We couldn't verify your payment. Please refresh and try again.";
     }
-
 
     /*
      * Keep the URL intact when
@@ -264,11 +246,9 @@ try {
         error
     } = await supabase.auth.getUser();
 
-
     if (error) {
         throw error;
     }
-
 
     if (!user) {
 
@@ -277,9 +257,7 @@ try {
         return;
     }
 
-
     currentUser = user;
-
 
     const name =
         user.user_metadata?.name ||
@@ -289,16 +267,13 @@ try {
         user.email ||
         "No email";
 
-
     if (userName) {
         userName.textContent = name;
     }
 
-
     if (userEmail) {
         userEmail.textContent = email;
     }
-
 
     if (avatar) {
 
@@ -308,12 +283,10 @@ try {
                 .toUpperCase() || "A";
     }
 
-
     await Promise.all([
         loadUsage(),
         loadQuizActivity()
     ]);
-
 
     /*
      * Check for a Paystack
@@ -343,11 +316,9 @@ try {
 
     setUsageLoading();
 
-
     const {
         data: { session }
     } = await supabase.auth.getSession();
-
 
     if (!session?.access_token) {
 
@@ -355,7 +326,6 @@ try {
             "No active session."
         );
     }
-
 
     const response =
         await fetch(
@@ -370,9 +340,7 @@ try {
             }
         );
 
-
     let data = null;
-
 
     try {
 
@@ -384,7 +352,6 @@ try {
         data = null;
     }
 
-
     if (!response.ok) {
 
         throw new Error(
@@ -392,7 +359,6 @@ try {
             "Unable to load Atomik usage."
         );
     }
-
 
     if (!data?.success) {
 
@@ -402,13 +368,11 @@ try {
         );
     }
 
-
     const plan =
         String(
             data.plan ||
             "free"
         );
-
 
     /*
      * PREMIUM USERS
@@ -418,7 +382,6 @@ try {
 
         const used =
             Number(data.used);
-
 
         updatePlan(plan);
 
@@ -430,7 +393,6 @@ try {
 
         return;
     }
-
 
     /*
      * FREE USERS
@@ -445,7 +407,6 @@ try {
     const limit =
         Number(data.limit);
 
-
     if (
         !Number.isFinite(used) ||
         !Number.isFinite(remaining) ||
@@ -457,7 +418,6 @@ try {
         );
     }
 
-
     updatePlan(plan);
 
     updateUsage(
@@ -465,7 +425,6 @@ try {
         remaining,
         limit
     );
-
 
 } catch (error) {
 
@@ -489,16 +448,13 @@ try {
         return;
     }
 
-
     if (completedCount) {
         completedCount.textContent = "…";
     }
 
-
     if (questionsAnswered) {
         questionsAnswered.textContent = "…";
     }
-
 
     const {
         data,
@@ -513,17 +469,14 @@ try {
             currentUser.id
         );
 
-
     if (error) {
         throw error;
     }
-
 
     const quizzes =
         Array.isArray(data)
             ? data
             : [];
-
 
     const completed =
         quizzes.filter(
@@ -531,9 +484,7 @@ try {
                 quiz.completed === true
         );
 
-
     let totalQuestions = 0;
-
 
     for (const quiz of completed) {
 
@@ -541,7 +492,6 @@ try {
             Number(
                 quiz.question_count
             );
-
 
         if (
             Number.isFinite(count) &&
@@ -553,20 +503,17 @@ try {
         }
     }
 
-
     if (completedCount) {
 
         completedCount.textContent =
             completed.length.toLocaleString();
     }
 
-
     if (questionsAnswered) {
 
         questionsAnswered.textContent =
             totalQuestions.toLocaleString();
     }
-
 
 } catch (error) {
 
@@ -575,11 +522,9 @@ try {
         error
     );
 
-
     if (completedCount) {
         completedCount.textContent = "—";
     }
-
 
     if (questionsAnswered) {
         questionsAnswered.textContent = "—";
@@ -597,42 +542,35 @@ if (planLabel) {
         "CHECKING PLAN...";
 }
 
-
 if (planDescription) {
     planDescription.textContent =
         "Checking your account...";
 }
-
 
 if (usageCount) {
     usageCount.textContent =
         "Loading...";
 }
 
-
 if (usageRemaining) {
     usageRemaining.textContent =
         "Loading...";
 }
-
 
 if (usageUsed) {
     usageUsed.textContent =
         "Checking usage...";
 }
 
-
 if (usageLimit) {
     usageLimit.textContent =
         `${FREE_LIMIT} total`;
 }
 
-
 if (usageMessage) {
     usageMessage.textContent =
         "Checking your Atomik usage...";
 }
-
 
 if (usageProgress) {
     usageProgress.style.width =
@@ -650,7 +588,6 @@ const normalizedPlan =
         .trim()
         .toLowerCase();
 
-
 if (
     normalizedPlan === "free" ||
     !normalizedPlan
@@ -661,7 +598,6 @@ if (
             "FREE PLAN";
     }
 
-
     if (planDescription) {
         planDescription.textContent =
             "Your current Atomik plan";
@@ -669,7 +605,6 @@ if (
 
     return;
 }
-
 
 /*
  * PREMIUM MONTHLY
@@ -685,7 +620,6 @@ if (
             "PREMIUM MONTHLY PLAN";
     }
 
-
     if (planDescription) {
         planDescription.textContent =
             "Unlimited quiz generation";
@@ -693,7 +627,6 @@ if (
 
     return;
 }
-
 
 /*
  * PREMIUM YEARLY
@@ -709,7 +642,6 @@ if (
             "PREMIUM YEARLY PLAN";
     }
 
-
     if (planDescription) {
         planDescription.textContent =
             "Unlimited quiz generation";
@@ -717,7 +649,6 @@ if (
 
     return;
 }
-
 
 /*
  * FALLBACK
@@ -735,13 +666,11 @@ const readablePlan =
                 letter.toUpperCase()
         );
 
-
 if (planLabel) {
 
     planLabel.textContent =
         `${readablePlan.toUpperCase()} PLAN`;
 }
-
 
 if (planDescription) {
 
@@ -765,7 +694,6 @@ const safeLimit =
         0
     );
 
-
 const safeUsed =
     Math.min(
         Math.max(
@@ -774,7 +702,6 @@ const safeUsed =
         ),
         safeLimit
     );
-
 
 const safeRemaining =
     Math.min(
@@ -785,19 +712,16 @@ const safeRemaining =
         safeLimit
     );
 
-
 const percentage =
     safeLimit > 0
         ? (safeUsed / safeLimit) * 100
         : 0;
-
 
 if (usageCount) {
 
     usageCount.textContent =
         `${safeUsed} / ${safeLimit}`;
 }
-
 
 if (usageRemaining) {
 
@@ -806,7 +730,6 @@ if (usageRemaining) {
             ? "1 remaining"
             : `${safeRemaining} remaining`;
 }
-
 
 if (usageProgress) {
 
@@ -820,7 +743,6 @@ if (usageProgress) {
         )}%`;
 }
 
-
 if (usageUsed) {
 
     usageUsed.textContent =
@@ -829,13 +751,11 @@ if (usageUsed) {
             : `${safeUsed} generations used`;
 }
 
-
 if (usageLimit) {
 
     usageLimit.textContent =
         `${safeLimit} total`;
 }
-
 
 if (usageMessage) {
 
@@ -868,13 +788,11 @@ const safeUsed =
         0
     );
 
-
 if (usageCount) {
 
     usageCount.textContent =
         "Unlimited";
 }
-
 
 if (usageRemaining) {
 
@@ -882,13 +800,11 @@ if (usageRemaining) {
         "Unlimited";
 }
 
-
 if (usageProgress) {
 
     usageProgress.style.width =
         "100%";
 }
-
 
 if (usageUsed) {
 
@@ -898,13 +814,11 @@ if (usageUsed) {
             : `${safeUsed.toLocaleString()} generations used`;
 }
 
-
 if (usageLimit) {
 
     usageLimit.textContent =
         "Unlimited";
 }
-
 
 if (usageMessage) {
 
@@ -923,48 +837,40 @@ if (planLabel) {
         "PLAN UNAVAILABLE";
 }
 
-
 if (planDescription) {
     planDescription.textContent =
         "Usage temporarily unavailable";
 }
-
 
 if (usageCount) {
     usageCount.textContent =
         "—";
 }
 
-
 if (usageRemaining) {
     usageRemaining.textContent =
         "Unavailable";
 }
-
 
 if (usageProgress) {
     usageProgress.style.width =
         "0%";
 }
 
-
 if (usageUsed) {
     usageUsed.textContent =
         "Usage could not be loaded";
 }
-
 
 if (usageLimit) {
     usageLimit.textContent =
         "Unavailable";
 }
 
-
 if (usageMessage) {
     usageMessage.textContent =
         "We couldn't reach the Atomik usage service. Try refreshing the page.";
 }
-
 
 if (accountMessage) {
     accountMessage.textContent =
@@ -1017,7 +923,6 @@ signOutButton.addEventListener(
         signOutButton.textContent =
             "Signing out...";
 
-
         try {
 
             const {
@@ -1027,14 +932,11 @@ signOutButton.addEventListener(
                     scope: "local"
                 });
 
-
             if (error) {
                 throw error;
             }
 
-
             redirectToAuth();
-
 
         } catch (error) {
 
@@ -1043,13 +945,11 @@ signOutButton.addEventListener(
                 error
             );
 
-
             if (accountMessage) {
 
                 accountMessage.textContent =
                     "Unable to sign out. Please try again.";
             }
-
 
             signOutButton.disabled =
                 false;
