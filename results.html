@@ -1,0 +1,404 @@
+
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>Atomik Results</title>
+
+<link
+    rel="stylesheet"
+    href="results.css"
+>
+
+</head><body><main class="results-container">
+
+
+    <!-- =========================================
+         HEADER
+    ========================================== -->
+
+    <header class="results-header">
+
+        <div class="brand">
+
+            <div class="atomik-symbol">
+                A
+            </div>
+
+            <div class="atomik-name">
+                ATOMIK
+            </div>
+
+        </div>
+
+
+        <div class="header-actions">
+
+            <a
+                href="history.html"
+                class="history-btn"
+            >
+                <span>◷</span>
+                History
+            </a>
+
+
+            <a
+                href="index.html"
+                class="new-quiz-btn"
+            >
+                + New Quiz
+            </a>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =========================================
+         RESULT HERO
+    ========================================== -->
+
+    <section class="result-hero">
+
+        <div class="result-glow"></div>
+
+
+        <div class="result-label">
+            QUIZ COMPLETE
+        </div>
+
+
+        <h1>
+            Your Result
+        </h1>
+
+
+        <p class="result-subtitle">
+            Here's how you performed.
+        </p>
+
+
+
+        <!-- SCORE CIRCLE -->
+
+        <div
+            class="score-circle"
+            id="scoreCircle"
+        >
+
+            <div class="score-circle-inner">
+
+                <div
+                    class="score-percentage"
+                    id="scorePercentage"
+                >
+                    0%
+                </div>
+
+
+                <div class="score-text">
+                    SCORE
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- SCORE -->
+
+        <div class="score-main">
+
+            <span id="score">
+                0
+            </span>
+
+            <span class="score-divider">
+                /
+            </span>
+
+            <span id="total">
+                0
+            </span>
+
+        </div>
+
+
+
+        <!-- PERFORMANCE -->
+
+        <div
+            class="performance-message"
+            id="performanceMessage"
+        >
+            Great work!
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================
+         QUIZ DETAILS
+    ========================================== -->
+
+    <section
+        class="quiz-metadata"
+        id="quizMetadata"
+    >
+
+        <div class="metadata-header">
+
+            <span class="metadata-label">
+                QUIZ DETAILS
+            </span>
+
+        </div>
+
+
+        <div class="metadata-main">
+
+            <div
+                class="metadata-title"
+                id="metadataTitle"
+            >
+                Atomik Quiz
+            </div>
+
+
+            <div class="metadata-details">
+
+                <span id="metadataFocus">
+                    Entire document
+                </span>
+
+
+                <span class="metadata-dot">
+                    •
+                </span>
+
+
+                <span id="metadataDifficulty">
+                    Medium
+                </span>
+
+
+                <span class="metadata-dot">
+                    •
+                </span>
+
+
+                <span id="metadataQuestions">
+                    0 questions
+                </span>
+
+            </div>
+
+
+            <div
+                class="metadata-topic"
+                id="metadataTopic"
+            ></div>
+
+
+            <div
+                class="metadata-file"
+                id="metadataFile"
+            ></div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================
+         STATISTICS
+    ========================================== -->
+
+    <section class="stats-grid">
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon correct-icon">
+                ✓
+            </div>
+
+
+            <div>
+
+                <div
+                    class="stat-value"
+                    id="correctCount"
+                >
+                    0
+                </div>
+
+
+                <div class="stat-label">
+                    Correct
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon wrong-icon">
+                ×
+            </div>
+
+
+            <div>
+
+                <div
+                    class="stat-value"
+                    id="wrongCount"
+                >
+                    0
+                </div>
+
+
+                <div class="stat-label">
+                    Incorrect
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon total-icon">
+                #
+            </div>
+
+
+            <div>
+
+                <div
+                    class="stat-value"
+                    id="totalCount"
+                >
+                    0
+                </div>
+
+
+                <div class="stat-label">
+                    Questions
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =========================================
+         REVIEW SECTION
+    ========================================== -->
+
+    <section class="review-section">
+
+
+        <div class="review-header">
+
+            <div>
+
+                <div class="section-label">
+                    ANSWER REVIEW
+                </div>
+
+
+                <h2>
+                    Question Breakdown
+                </h2>
+
+            </div>
+
+        </div>
+
+
+
+        <div
+            class="question-review-list"
+            id="questionReviewList"
+        >
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =========================================
+         BOTTOM ACTIONS
+    ========================================== -->
+
+    <div class="bottom-actions">
+
+
+        <a
+            href="index.html"
+            class="bottom-btn secondary-btn"
+        >
+            ← Create New Quiz
+        </a>
+
+
+        <a
+            href="history.html"
+            class="bottom-btn primary-btn"
+        >
+            View History
+            <span>→</span>
+        </a>
+
+
+    </div>
+
+
+
+    <!-- =========================================
+         FOOTER
+    ========================================== -->
+
+    <footer class="results-footer">
+
+        <span>
+            POWERED BY
+        </span>
+
+
+        <strong>
+            ATOMIK
+        </strong>
+
+    </footer>
+
+
+</main>
+
+
+
+<script
+    type="module"
+    src="results.js"
+></script>
+
+</body></html>

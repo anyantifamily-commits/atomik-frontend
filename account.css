@@ -1,0 +1,750 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+    font-family:
+        Inter,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+    background:
+        radial-gradient(
+            circle at top,
+            #3b0b14 0%,
+            #16070a 45%,
+            #090305 100%
+        );
+
+    color: #ffffff;
+}
+
+.account-page {
+    width: 100%;
+    max-width: 600px;
+    margin: auto;
+
+    padding:
+        24px
+        20px
+        40px;
+}
+
+
+/* HEADER */
+
+.account-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 40px;
+}
+
+.back-button {
+    width: 44px;
+    height: 44px;
+
+    border:
+        1px solid
+        rgba(255,255,255,0.1);
+
+    border-radius: 14px;
+
+    background:
+        rgba(255,255,255,0.06);
+
+    color: white;
+
+    font-size: 24px;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.back-button:hover {
+    background:
+        rgba(255,255,255,0.11);
+
+    transform:
+        translateX(-2px);
+}
+
+.back-button:focus-visible,
+.account-option:focus-visible,
+.signout-button:focus-visible {
+    outline:
+        2px solid
+        #ff334f;
+
+    outline-offset: 3px;
+}
+
+.brand {
+    font-size: 21px;
+    font-weight: 900;
+    letter-spacing: 3px;
+    color: #ff334f;
+}
+
+
+/* PROFILE */
+
+.profile-card {
+    display: flex;
+    align-items: center;
+
+    gap: 18px;
+
+    padding: 24px;
+
+    border-radius: 24px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,0.09),
+            rgba(255,255,255,0.035)
+        );
+
+    border:
+        1px solid
+        rgba(255,255,255,0.08);
+
+    box-shadow:
+        0 20px 50px
+        rgba(0,0,0,0.25);
+}
+
+.avatar {
+    width: 70px;
+    height: 70px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ff334f,
+            #a90020
+        );
+
+    font-size: 28px;
+    font-weight: 800;
+
+    box-shadow:
+        0 10px 30px
+        rgba(255,51,79,0.25);
+}
+
+.profile-info {
+    min-width: 0;
+}
+
+.profile-info h1 {
+    font-size: 25px;
+    margin-bottom: 6px;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.profile-info p {
+    color: #aaa;
+    font-size: 14px;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
+/* SECTIONS */
+
+.usage-section,
+.activity-section {
+    margin-top: 32px;
+}
+
+.section-heading {
+    margin-bottom: 13px;
+}
+
+.section-heading span {
+    font-size: 13px;
+    color: #888;
+
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+
+    font-weight: 700;
+}
+
+
+/* PLAN CARD */
+
+.plan-card {
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+
+    padding: 18px;
+
+    border-radius: 19px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,51,79,0.13),
+            rgba(255,255,255,0.045)
+        );
+
+    border:
+        1px solid
+        rgba(255,51,79,0.18);
+}
+
+.plan-icon {
+    width: 45px;
+    height: 45px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 14px;
+
+    background:
+        rgba(255,51,79,0.15);
+
+    color: #ff5268;
+
+    font-size: 24px;
+    font-weight: 800;
+}
+
+.plan-info {
+    min-width: 0;
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 4px;
+}
+
+.plan-label {
+    color: #ff5268;
+
+    font-size: 11px;
+    font-weight: 800;
+
+    letter-spacing: 1.2px;
+}
+
+.plan-info strong {
+    font-size: 14px;
+    font-weight: 600;
+
+    color: #ddd;
+
+    overflow-wrap: anywhere;
+}
+
+.plan-status {
+    flex-shrink: 0;
+
+    padding:
+        6px
+        9px;
+
+    border-radius: 8px;
+
+    background:
+        rgba(255,255,255,0.06);
+
+    color: #999;
+
+    font-size: 9px;
+    font-weight: 800;
+
+    letter-spacing: 1px;
+}
+
+
+/* USAGE CARD */
+
+.usage-card {
+    padding: 21px;
+
+    border-radius: 20px;
+
+    background:
+        rgba(255,255,255,0.045);
+
+    border:
+        1px solid
+        rgba(255,255,255,0.08);
+}
+
+.usage-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 15px;
+}
+
+.usage-top > div:first-child {
+    min-width: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 5px;
+}
+
+.usage-label {
+    color: #777;
+
+    font-size: 10px;
+    font-weight: 800;
+
+    letter-spacing: 1.2px;
+}
+
+.usage-top strong {
+    font-size: 23px;
+    font-weight: 800;
+
+    color: #ffffff;
+}
+
+.usage-remaining {
+    flex-shrink: 0;
+
+    color: #ff5268;
+
+    font-size: 13px;
+    font-weight: 800;
+
+    text-align: right;
+}
+
+.usage-track {
+    width: 100%;
+    height: 9px;
+
+    margin-top: 19px;
+
+    overflow: hidden;
+
+    border-radius: 999px;
+
+    background:
+        rgba(255,255,255,0.08);
+}
+
+.usage-progress {
+    width: 0%;
+    height: 100%;
+
+    border-radius: inherit;
+
+    background:
+        linear-gradient(
+            90deg,
+            #a90020,
+            #ff334f
+        );
+
+    transition:
+        width 0.5s ease;
+}
+
+.usage-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 12px;
+
+    margin-top: 10px;
+
+    color: #666;
+
+    font-size: 11px;
+}
+
+.usage-message {
+    margin-top: 15px;
+
+    color: #777;
+
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+
+/* QUIZ ACTIVITY */
+
+.activity-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 12px;
+}
+
+.activity-card {
+    min-width: 0;
+
+    display: flex;
+    align-items: center;
+
+    gap: 13px;
+
+    padding: 17px;
+
+    border-radius: 18px;
+
+    background:
+        rgba(255,255,255,0.045);
+
+    border:
+        1px solid
+        rgba(255,255,255,0.08);
+}
+
+.activity-icon {
+    width: 42px;
+    height: 42px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 13px;
+
+    background:
+        rgba(255,51,79,0.12);
+
+    color: #ff5268;
+
+    font-size: 18px;
+    font-weight: 900;
+}
+
+.activity-info {
+    min-width: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 3px;
+}
+
+.activity-info strong {
+    font-size: 20px;
+    font-weight: 800;
+
+    color: #fff;
+}
+
+.activity-info span {
+    color: #777;
+
+    font-size: 11px;
+
+    line-height: 1.35;
+}
+
+
+/* ACCOUNT SECTION */
+
+.account-section {
+    margin-top: 36px;
+}
+
+.account-section h2 {
+    font-size: 14px;
+    color: #888;
+
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+
+    margin-bottom: 14px;
+}
+
+
+/* OPTION */
+
+.account-option {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+
+    gap: 15px;
+
+    padding: 18px;
+
+    border:
+        1px solid
+        rgba(255,255,255,0.08);
+
+    border-radius: 18px;
+
+    background:
+        rgba(255,255,255,0.045);
+
+    color: white;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.account-option:hover {
+    background:
+        rgba(255,255,255,0.08);
+
+    transform:
+        translateY(-2px);
+}
+
+.option-icon {
+    width: 44px;
+    height: 44px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 13px;
+
+    background:
+        rgba(255,51,79,0.12);
+
+    font-size: 21px;
+}
+
+.option-text {
+    min-width: 0;
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 4px;
+}
+
+.option-text strong {
+    font-size: 15px;
+}
+
+.option-text small {
+    color: #888;
+    font-size: 12px;
+}
+
+.arrow {
+    flex-shrink: 0;
+
+    color: #777;
+    font-size: 20px;
+}
+
+
+/* ACTIONS */
+
+.actions-section {
+    margin-top: 35px;
+}
+
+.signout-button {
+    width: 100%;
+
+    padding: 16px;
+
+    border-radius: 16px;
+
+    border:
+        1px solid
+        rgba(255,51,79,0.25);
+
+    background:
+        rgba(255,51,79,0.08);
+
+    color: #ff5268;
+
+    font-size: 15px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.signout-button:hover {
+    background:
+        rgba(255,51,79,0.15);
+}
+
+.signout-button:disabled {
+    opacity: 0.5;
+    cursor: wait;
+}
+
+
+/* MESSAGE */
+
+.account-message {
+    text-align: center;
+
+    min-height: 20px;
+
+    margin-top: 18px;
+
+    font-size: 13px;
+
+    color: #ff5268;
+}
+
+
+/* VERSION */
+
+.version {
+    text-align: center;
+
+    margin-top: 35px;
+
+    color: #444;
+
+    font-size: 11px;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 480px) {
+
+    .account-page {
+        padding:
+            20px
+            16px
+            35px;
+    }
+
+    .profile-card {
+        padding: 20px;
+    }
+
+    .avatar {
+        width: 60px;
+        height: 60px;
+
+        font-size: 24px;
+    }
+
+    .profile-info h1 {
+        font-size: 21px;
+    }
+
+    .plan-card {
+        padding: 16px;
+    }
+
+    .plan-status {
+        display: none;
+    }
+
+    .usage-card {
+        padding: 18px;
+    }
+
+    .usage-top strong {
+        font-size: 21px;
+    }
+
+    .activity-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .activity-card {
+        padding: 16px;
+    }
+
+}
+
+
+/* VERY SMALL SCREENS */
+
+@media (max-width: 350px) {
+
+    .profile-card {
+        gap: 12px;
+        padding: 17px;
+    }
+
+    .avatar {
+        width: 54px;
+        height: 54px;
+        font-size: 21px;
+    }
+
+    .profile-info h1 {
+        font-size: 18px;
+    }
+
+    .profile-info p {
+        font-size: 12px;
+    }
+
+    .usage-top {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .usage-remaining {
+        text-align: left;
+    }
+
+}
+
+
+/* REDUCED MOTION */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .back-button,
+    .account-option,
+    .signout-button,
+    .usage-progress {
+        transition: none;
+    }
+
+}

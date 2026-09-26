@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Account • Atomik</title>
+
+    <link
+        rel="stylesheet"
+        href="account.css"
+    >
+
+</head>
+
+
+<body>
+
+    <main class="account-page">
+
+
+        <!-- TOP BAR -->
+
+        <header class="account-header">
+
+            <button
+                type="button"
+                class="back-button"
+                id="backButton"
+                aria-label="Back to Atomik"
+            >
+                ←
+            </button>
+
+            <div class="brand">
+                ATOMIK
+            </div>
+
+        </header>
+
+
+
+        <!-- PROFILE -->
+
+        <section class="profile-card">
+
+            <div
+                class="avatar"
+                id="avatar"
+            >
+                A
+            </div>
+
+
+            <div class="profile-info">
+
+                <h1 id="userName">
+                    Loading...
+                </h1>
+
+                <p id="userEmail">
+                    Loading...
+                </p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- PLAN -->
+
+        <section class="usage-section">
+
+            <div class="section-heading">
+                <span>YOUR PLAN</span>
+            </div>
+
+
+            <div class="plan-card">
+
+                <div class="plan-icon">
+                    ⚛
+                </div>
+
+
+                <div class="plan-info">
+
+                    <span
+                        class="plan-label"
+                        id="planLabel"
+                    >
+                        FREE PLAN
+                    </span>
+
+                    <strong id="planDescription">
+                        Your current Atomik plan
+                    </strong>
+
+                </div>
+
+
+                <div class="plan-status">
+                    ACTIVE
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- USAGE -->
+
+        <section class="usage-section">
+
+            <div class="section-heading">
+                <span>GENERATIONS</span>
+            </div>
+
+
+            <div class="usage-card">
+
+                <div class="usage-top">
+
+                    <div>
+
+                        <span class="usage-label">
+                            FREE GENERATIONS
+                        </span>
+
+                        <strong id="usageCount">
+                            Loading...
+                        </strong>
+
+                    </div>
+
+
+                    <div
+                        class="usage-remaining"
+                        id="usageRemaining"
+                    >
+                        Loading...
+                    </div>
+
+                </div>
+
+
+                <div
+                    class="usage-track"
+                    aria-hidden="true"
+                >
+
+                    <div
+                        class="usage-progress"
+                        id="usageProgress"
+                    ></div>
+
+                </div>
+
+
+                <div class="usage-bottom">
+
+                    <span id="usageUsed">
+                        Loading usage...
+                    </span>
+
+                    <span id="usageLimit">
+                        3 total
+                    </span>
+
+                </div>
+
+
+                <p
+                    class="usage-message"
+                    id="usageMessage"
+                >
+                    Checking your Atomik usage...
+                </p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- QUIZ ACTIVITY -->
+
+        <section class="activity-section">
+
+            <div class="section-heading">
+                <span>QUIZ ACTIVITY</span>
+            </div>
+
+
+            <div class="activity-grid">
+
+
+                <div class="activity-card">
+
+                    <div class="activity-icon">
+                        ✓
+                    </div>
+
+                    <div class="activity-info">
+
+                        <strong id="completedCount">
+                            —
+                        </strong>
+
+                        <span>
+                            Quizzes completed
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="activity-card">
+
+                    <div class="activity-icon">
+                        ?
+                    </div>
+
+                    <div class="activity-info">
+
+                        <strong id="questionsAnswered">
+                            —
+                        </strong>
+
+                        <span>
+                            Questions answered
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ACCOUNT OPTIONS -->
+
+        <section class="account-section">
+
+            <h2>
+                Account
+            </h2>
+
+
+            <button
+                type="button"
+                class="account-option"
+                id="historyButton"
+            >
+
+                <span class="option-icon">
+                    📚
+                </span>
+
+                <span class="option-text">
+
+                    <strong>
+                        Quiz History
+                    </strong>
+
+                    <small>
+                        View your previous quizzes
+                    </small>
+
+                </span>
+
+                <span class="arrow">
+                    →
+                </span>
+
+            </button>
+
+
+        </section>
+
+
+
+        <!-- ACTIONS -->
+
+        <section class="actions-section">
+
+            <button
+                type="button"
+                class="signout-button"
+                id="signOutButton"
+            >
+                Sign Out
+            </button>
+
+        </section>
+
+
+
+        <p
+            class="account-message"
+            id="accountMessage"
+        ></p>
+
+
+        <p class="version">
+            Atomik
+        </p>
+
+
+    </main>
+
+
+    <script
+        type="module"
+        src="account.js"
+    ></script>
+
+</body>
+
+</html>

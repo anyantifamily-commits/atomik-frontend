@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Atomik Quiz</title>
+<link rel="stylesheet" href="quiz.css?v=2">
+</head>
+
+
+<body>
+
+    <main class="quiz-container">
+
+        <!-- TOP BAR -->
+
+        <header class="top-bar">
+
+            <div class="atomik-brand">
+
+                <div class="atomik-symbol">
+                    A
+                </div>
+
+                <div class="atomik-name">
+                    ATOMIK
+                </div>
+
+            </div>
+
+
+<div class="quiz-top-actions">
+
+    <a
+        href="history.html"
+        class="history-btn"
+    >
+        <span>◷</span>
+        History
+    </a>
+
+    <div
+        class="question-count"
+        id="questionCount"
+    >
+        Question 1 of 10
+    </div>
+
+</div>
+
+        </header>
+
+
+        <!-- PROGRESS -->
+
+        <div class="progress-area">
+
+            <div class="progress-track">
+                <div
+                    class="progress-bar"
+                    id="progressBar"
+                ></div>
+            </div>
+
+        </div>
+
+
+        <!-- QUIZ CONTENT -->
+
+        <section class="quiz-card">
+
+            <!-- Decorative glow -->
+
+            <div class="card-glow"></div>
+
+
+            <!-- QUESTION META -->
+
+            <div class="question-meta">
+
+                <span
+                    class="difficulty"
+                    id="difficulty"
+                >
+                    MEDIUM
+                </span>
+
+                <span class="question-label">
+                    KNOWLEDGE CHECK
+                </span>
+
+            </div>
+
+
+            <!-- QUESTION -->
+
+            <h1 id="question">
+                Loading question...
+            </h1>
+
+
+            <!-- ANSWERS -->
+
+            <div
+                class="answers"
+                id="answers"
+            >
+                <!-- JavaScript generates answers here -->
+            </div>
+
+
+            <!-- NAVIGATION -->
+
+            <div class="navigation">
+
+                <button
+                    type="button"
+                    id="previousBtn"
+                    class="nav-btn previous-btn"
+                >
+                    <span>←</span>
+                    Previous
+                </button>
+
+
+                <button
+                    type="button"
+                    id="nextBtn"
+                    class="nav-btn next-btn"
+                >
+                    Next
+                    <span>→</span>
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- FOOTER -->
+
+        <div class="quiz-footer">
+            <span>POWERED BY</span>
+            <strong>ATOMIK</strong>
+        </div>
+
+    </main>
+
+
+<script type="module" src="quiz.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,247 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Atomik — Account</title>
+
+    <link rel="stylesheet" href="auth.css">
+</head>
+
+<body>
+
+    <div class="auth-page">
+
+        <!-- Back -->
+        <a href="index.html" class="back-button">
+            ← Back to Atomik
+        </a>
+
+        <!-- Auth Card -->
+        <div class="auth-card">
+
+            <!-- Logo -->
+            <div class="logo">
+                <span class="logo-symbol">A</span>
+                <span>ATOMIK</span>
+            </div>
+
+            <!-- Header -->
+            <div class="auth-header">
+                <h1 id="authTitle">Welcome back</h1>
+
+                <p id="authSubtitle">
+                    Sign in to continue to Atomik.
+                </p>
+            </div>
+
+
+            <!-- Message -->
+            <div id="authMessage" class="auth-message"></div>
+
+
+            <!-- Sign In Form -->
+            <form id="signinForm" class="auth-form">
+
+                <div class="input-group">
+                    <label for="signinEmail">
+                        Email address
+                    </label>
+
+                    <input
+                        type="email"
+                        id="signinEmail"
+                        placeholder="you@example.com"
+                        autocomplete="email"
+                        required
+                    >
+                </div>
+
+
+                <div class="input-group">
+
+                    <div class="label-row">
+                        <label for="signinPassword">
+                            Password
+                        </label>
+
+                        <button
+                            type="button"
+                            class="forgot-button"
+                            id="forgotPassword"
+                        >
+                            Forgot password?
+                        </button>
+                    </div>
+
+                    <div class="password-wrapper">
+
+                        <input
+                            type="password"
+                            id="signinPassword"
+                            placeholder="Enter your password"
+                            autocomplete="current-password"
+                            required
+                        >
+
+                        <button
+                            type="button"
+                            class="show-password"
+                            data-target="signinPassword"
+                        >
+                            Show
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="primary-button"
+                    id="signinButton"
+                >
+                    Sign In
+                </button>
+
+            </form>
+
+
+            <!-- Sign Up Form -->
+            <form
+                id="signupForm"
+                class="auth-form hidden"
+            >
+
+                <div class="input-group">
+                    <label for="signupName">
+                        Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="signupName"
+                        placeholder="Your name"
+                        autocomplete="name"
+                        required
+                    >
+                </div>
+
+
+                <div class="input-group">
+                    <label for="signupEmail">
+                        Email address
+                    </label>
+
+                    <input
+                        type="email"
+                        id="signupEmail"
+                        placeholder="you@example.com"
+                        autocomplete="email"
+                        required
+                    >
+                </div>
+
+
+                <div class="input-group">
+                    <label for="signupPassword">
+                        Password
+                    </label>
+
+                    <div class="password-wrapper">
+
+                        <input
+                            type="password"
+                            id="signupPassword"
+                            placeholder="At least 6 characters"
+                            autocomplete="new-password"
+                            minlength="6"
+                            required
+                        >
+
+                        <button
+                            type="button"
+                            class="show-password"
+                            data-target="signupPassword"
+                        >
+                            Show
+                        </button>
+
+                    </div>
+                </div>
+
+
+                <div class="input-group">
+                    <label for="confirmPassword">
+                        Confirm password
+                    </label>
+
+                    <div class="password-wrapper">
+
+                        <input
+                            type="password"
+                            id="confirmPassword"
+                            placeholder="Enter your password again"
+                            autocomplete="new-password"
+                            minlength="6"
+                            required
+                        >
+
+                        <button
+                            type="button"
+                            class="show-password"
+                            data-target="confirmPassword"
+                        >
+                            Show
+                        </button>
+
+                    </div>
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="primary-button"
+                    id="signupButton"
+                >
+                    Create Account
+                </button>
+
+            </form>
+
+
+            <!-- Switch -->
+            <div class="switch-auth">
+
+                <span id="switchText">
+                    Don't have an account?
+                </span>
+
+                <button
+                    type="button"
+                    id="switchAuth"
+                >
+                    Create account
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script
+        type="module"
+        src="auth.js"
+    ></script>
+
+</body>
+</html>

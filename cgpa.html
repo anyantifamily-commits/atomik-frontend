@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Atomik CGPA Calculator</title>
+
+    <link
+        rel="stylesheet"
+        href="cgpa.css"
+    >
+</head>
+
+
+<body>
+
+    <!-- =====================================================
+         BACKGROUND EFFECT
+         ===================================================== -->
+
+    <div class="background-glow glow-one"></div>
+    <div class="background-glow glow-two"></div>
+
+
+    <!-- =====================================================
+         HEADER
+         ===================================================== -->
+
+    <header class="cgpa-header">
+
+        <a href="index.html" class="atomik-logo">
+            <span class="logo-symbol">⚛</span>
+
+            <span>
+                <strong>ATOMIK</strong>
+                <small>Student Tools</small>
+            </span>
+        </a>
+
+        <a
+            href="index.html"
+            class="back-button"
+        >
+            ← Atomik
+        </a>
+
+    </header>
+
+
+    <!-- =====================================================
+         MAIN
+         ===================================================== -->
+
+    <main class="cgpa-main">
+
+
+        <!-- HERO -->
+
+        <section class="cgpa-hero">
+
+            <div class="hero-badge">
+                FREE STUDENT TOOL
+            </div>
+
+            <h1>
+                CGPA
+                <span>Calculator</span>
+            </h1>
+
+            <p>
+                Calculate your GPA and CGPA quickly,
+                accurately, and effortlessly.
+            </p>
+
+        </section>
+
+
+
+        <!-- =================================================
+             CALCULATOR CARD
+             ================================================= -->
+
+        <section class="calculator-card">
+
+
+            <!-- CARD HEADER -->
+
+            <div class="calculator-header">
+
+                <div>
+                    <span class="section-label">
+                        SEMESTER CALCULATOR
+                    </span>
+
+                    <h2>
+                        Enter your courses
+                    </h2>
+                </div>
+
+                <div class="calculator-icon">
+                    🧮
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 COURSE TABLE
+                 ================================================= -->
+
+            <div class="course-container">
+
+                <div class="course-headings">
+
+                    <span>COURSE</span>
+                    <span>UNIT</span>
+                    <span>GRADE</span>
+                    <span></span>
+
+                </div>
+
+
+                <div id="courseList">
+
+                    <!-- First course -->
+
+                    <div class="course-row">
+
+                        <input
+                            type="text"
+                            class="course-code"
+                            placeholder="BIO 101"
+                        >
+
+                        <input
+                            type="number"
+                            class="credit-unit"
+                            placeholder="3"
+                            min="1"
+                            max="20"
+                        >
+
+                        <select class="grade">
+
+                            <option value="">
+                                Grade
+                            </option>
+
+                            <option value="5">
+                                A
+                            </option>
+
+                            <option value="4">
+                                B
+                            </option>
+
+                            <option value="3">
+                                C
+                            </option>
+
+                            <option value="2">
+                                D
+                            </option>
+
+                            <option value="1">
+                                E
+                            </option>
+
+                            <option value="0">
+                                F
+                            </option>
+
+                        </select>
+
+                        <button
+                            type="button"
+                            class="remove-course"
+                            onclick="removeCourse(this)"
+                        >
+                            ×
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ADD COURSE -->
+
+            <button
+                type="button"
+                class="add-course-button"
+                onclick="addCourse()"
+            >
+                <span>+</span>
+                Add Course
+            </button>
+
+
+
+            <!-- =================================================
+                 CALCULATE
+                 ================================================= -->
+
+            <button
+                type="button"
+                class="calculate-button"
+                onclick="calculateGPA()"
+            >
+                Calculate GPA
+                <span>→</span>
+            </button>
+
+
+
+            <!-- =================================================
+                 RESULT
+                 ================================================= -->
+
+            <div
+                id="resultCard"
+                class="result-card hidden"
+            >
+
+                <div class="result-title">
+                    YOUR RESULT
+                </div>
+
+                <div
+                    id="gpaValue"
+                    class="gpa-value"
+                >
+                    0.00
+                </div>
+
+                <div
+                    id="classification"
+                    class="classification"
+                >
+                    —
+                </div>
+
+
+                <div class="result-stats">
+
+                    <div>
+                        <span>Total Units</span>
+                        <strong id="totalUnits">
+                            0
+                        </strong>
+                    </div>
+
+                    <div>
+                        <span>Grade Points</span>
+                        <strong id="totalPoints">
+                            0
+                        </strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- RESET -->
+
+            <button
+                type="button"
+                class="reset-button"
+                onclick="resetCalculator()"
+            >
+                ↻ Reset Calculator
+            </button>
+
+        </section>
+
+
+
+        <!-- =================================================
+             CGPA INFO
+             ================================================= -->
+
+        <section class="info-card">
+
+            <div class="info-icon">
+                💡
+            </div>
+
+            <div>
+
+                <h3>
+                    How is GPA calculated?
+                </h3>
+
+                <p>
+                    GPA is calculated by dividing your
+                    total quality points by your total
+                    credit units.
+                </p>
+
+                <div class="formula">
+                    GPA =
+                    <strong>
+                        Σ (Credit Unit × Grade Point)
+                    </strong>
+                    ÷
+                    <strong>
+                        Σ Credit Units
+                    </strong>
+                </div>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- =====================================================
+         FOOTER
+         ===================================================== -->
+
+    <footer class="cgpa-footer">
+
+        <div class="footer-logo">
+            ⚛ ATOMIK
+        </div>
+
+        <p>
+            Smart tools for smarter students.
+        </p>
+
+        <span>
+            © 2026 Atomik
+        </span>
+
+    </footer>
+
+
+    <script src="cgpa.js"></script>
+
+</body>
+
+</html>

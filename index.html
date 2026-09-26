@@ -1,0 +1,841 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="UTF-8"><meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<meta
+    name="description"
+    content="Atomik Quiz Generator — Turn your study notes into powerful practice questions."
+>
+
+<title>Atomik Quiz Generator</title>
+
+<link
+    rel="stylesheet"
+    href="style.css"
+>
+
+<link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+>
+
+<link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+>
+
+<link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+>
+
+</head><!-- CGPA CALCULATOR BUTTON --><a
+href="cgpa.html"
+class="cgpa-float"
+aria-label="Open CGPA Calculator"
+
+«»
+
+<span class="cgpa-icon">🧮</span>
+
+<span class="cgpa-text">
+    <strong>CGPA</strong>
+    <small>Calculator</small>
+</span>
+
+</a><body><!-- =========================================
+     ATOMIK GENERATION OVERLAY
+========================================= --><div
+    id="generationOverlay"
+    class="generation-overlay"
+    aria-hidden="true"
+><div class="generation-panel">
+
+    <div class="generation-logo">
+        <span>A</span>
+    </div>
+
+    <div class="generation-brand">
+        ATOMIK
+    </div>
+
+    <div class="atom-loader">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+    <h2 id="generationTitle">
+        Analyzing your material...
+    </h2>
+
+    <p id="generationMessage">
+        Atomik is preparing your quiz.
+    </p>
+
+    <div class="generation-progress">
+
+        <div
+            id="generationProgress"
+            class="generation-progress-bar"
+        ></div>
+
+    </div>
+
+    <div
+        id="generationStatus"
+        class="generation-status"
+    >
+        Preparing
+    </div>
+
+</div>
+
+</div><!-- =========================================
+     ATOMIK ERROR PANEL
+========================================= --><div
+    id="errorOverlay"
+    class="error-overlay"
+    aria-hidden="true"
+><div class="error-panel">
+
+    <div class="error-icon">
+        !
+    </div>
+
+    <span class="error-label">
+        ATOMIK
+    </span>
+
+    <h2 id="errorTitle">
+        Something went wrong
+    </h2>
+
+    <p id="errorMessage">
+        Atomik couldn't generate your quiz.
+    </p>
+
+    <div class="error-actions">
+
+        <button
+            id="errorRetryBtn"
+            class="error-primary-btn"
+        >
+            ↻ Try Again
+        </button>
+
+        <button
+            id="errorCloseBtn"
+            class="error-secondary-btn"
+        >
+            Close
+        </button>
+
+    </div>
+
+</div>
+
+</div><!-- BACKGROUND OVERLAY --><div class="background-overlay"></div><!-- =========================================
+     NAVBAR
+========================================= --><header class="navbar"><div class="logo">
+
+    <span class="logo-symbol">
+        ⚛
+    </span>
+
+    <span>
+        Atomik
+    </span>
+
+</div>
+
+
+<nav>
+
+    <a href="#generator">
+        Generator
+    </a>
+
+    <a href="#pricing">
+        Plans
+    </a>
+
+</nav>
+
+
+<div class="account-area">
+
+    <button
+        class="login-btn"
+        id="authButton"
+    >
+        Sign In
+    </button>
+
+</div>
+
+</header><!-- =========================================
+     HERO
+========================================= --><main><section class="hero">
+
+    <div class="hero-content">
+
+        <div class="badge">
+            ⚡ AI-Powered Study Tool
+        </div>
+
+        <h1>
+            Turn your notes into
+            <span>smart quizzes.</span>
+        </h1>
+
+        <p>
+            Upload your lecture notes, PDFs, slides or documents
+            and transform them into practice questions
+            designed to help you study smarter.
+        </p>
+
+        <button
+            class="hero-button"
+            onclick="scrollToGenerator()"
+        >
+
+            Start Generating
+            <span>→</span>
+
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================
+     GENERATOR
+========================================= -->
+
+<section
+    id="generator"
+    class="generator-section"
+>
+
+    <div class="section-heading">
+
+        <span class="section-label">
+            QUIZ GENERATOR
+        </span>
+
+        <h2>
+            What are you studying today?
+        </h2>
+
+        <p>
+            Upload your study material and let Atomik
+            do the heavy lifting.
+        </p>
+
+    </div>
+
+
+    <!-- =====================================
+         UPLOAD CARD
+    ===================================== -->
+
+    <div class="upload-card">
+
+
+        <!-- UPLOAD AREA -->
+
+        <div
+            class="upload-area"
+            id="uploadArea"
+        >
+
+            <input
+                type="file"
+                id="fileInput"
+                accept=".pdf,.doc,.docx,.pptx,.txt"
+                hidden
+            >
+
+            <div class="upload-icon">
+                📄
+            </div>
+
+            <h3>
+                Drop your study material here
+            </h3>
+
+            <p>
+                or choose a file from your device
+            </p>
+
+            <button
+                class="upload-button"
+                onclick="document.getElementById('fileInput').click()"
+            >
+
+                <span>＋</span>
+
+                Choose File
+
+            </button>
+
+            <small>
+                PDF · DOC · DOCX · PPTX · TXT · MAX 20 MB
+            </small>
+
+        </div>
+
+
+        <!-- =====================================
+             SELECTED FILE
+        ===================================== -->
+
+        <div
+            id="fileInfo"
+            class="file-info hidden"
+        >
+
+            <div class="file-icon">
+                📄
+            </div>
+
+            <div class="file-details">
+
+                <strong id="fileName">
+                    File name
+                </strong>
+
+                <span id="fileSize">
+                    File size
+                </span>
+
+                <span class="file-ready">
+                    ✓ Ready for Atomik
+                </span>
+
+            </div>
+
+            <button
+                class="remove-file"
+                onclick="removeFile()"
+                aria-label="Remove selected file"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <!-- =====================================
+             QUIZ FOCUS
+        ===================================== -->
+
+        <div class="form-group">
+
+            <label for="quizFocus">
+                Quiz focus
+            </label>
+
+            <select id="quizFocus">
+
+                <option
+                    value="entire"
+                    selected
+                >
+                    Entire document
+                </option>
+
+                <option value="topic">
+                    Specific topic
+                </option>
+
+            </select>
+
+            <small class="input-hint">
+                Choose whether Atomik should generate questions
+                from the entire document or focus on a specific topic.
+            </small>
+
+        </div>
+
+
+        <!-- =====================================
+             TOPIC INPUT
+        ===================================== -->
+
+        <div
+            class="form-group"
+            id="topicGroup"
+            style="display: none;"
+        >
+
+            <label for="topicInput">
+                What topic should Atomik focus on?
+            </label>
+
+            <input
+                type="text"
+                id="topicInput"
+                placeholder="e.g. Transcription, Genetics, Glycolysis..."
+                autocomplete="off"
+            >
+
+            <small class="input-hint">
+                Atomik will use this topic to guide question generation.
+            </small>
+
+        </div>
+
+
+        <!-- =====================================
+             QUESTION TYPE
+        ===================================== -->
+
+        <div class="form-group">
+
+            <label for="questionType">
+                Question type
+            </label>
+
+            <select id="questionType">
+
+                <option
+                    value="multiple_choice"
+                    selected
+                >
+                    Multiple Choice
+                </option>
+
+                <option value="true_false">
+                    True / False
+                </option>
+
+                <option value="mixed">
+                    Mixed
+                </option>
+
+            </select>
+
+            <small class="input-hint">
+                Choose the type of questions Atomik should generate.
+            </small>
+
+        </div>
+
+
+        <!-- =====================================
+             OPTIONS
+        ===================================== -->
+
+        <div class="options">
+
+
+            <!-- QUESTION COUNT -->
+
+            <div class="option-group">
+
+                <label for="questionCount">
+                    Number of questions
+                </label>
+
+                <select id="questionCount">
+
+                    <option value="5">
+                        5 Questions
+                    </option>
+
+                    <option
+                        value="10"
+                        selected
+                    >
+                        10 Questions
+                    </option>
+
+                    <option value="20">
+                        20 Questions
+                    </option>
+
+                    <option value="30">
+                        30 Questions
+                    </option>
+
+                    <option value="50">
+                        50 Questions
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- DIFFICULTY -->
+
+            <div class="option-group">
+
+                <label for="difficulty">
+                    Difficulty
+                </label>
+
+                <select id="difficulty">
+
+                    <option value="easy">
+                        Easy
+                    </option>
+
+                    <option
+                        value="medium"
+                        selected
+                    >
+                        Medium
+                    </option>
+
+                    <option value="hard">
+                        Hard
+                    </option>
+
+                    <option value="mixed">
+                        Mixed
+                    </option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+
+        <!-- =====================================
+             GENERATE
+        ===================================== -->
+
+        <button
+            class="generate-button"
+            onclick="generateQuiz()"
+        >
+
+            <span>
+                ⚡
+            </span>
+
+            Generate Questions
+
+        </button>
+
+
+        <!-- =====================================
+             FREE GENERATIONS
+        ===================================== -->
+
+        <div class="generation-info">
+
+            <span>
+                Free generations remaining:
+            </span>
+
+            <strong id="remaining">
+                3
+            </strong>
+
+        </div>
+
+
+        <!-- =====================================
+             WATCH AD
+        ===================================== -->
+
+        <button
+            class="ad-button"
+            onclick="watchAd()"
+        >
+
+            🎬 Watch an ad for more questions
+
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================
+     HOW IT WORKS
+========================================= -->
+
+<section class="how-section">
+
+    <div class="section-heading">
+
+        <span class="section-label">
+            HOW IT WORKS
+        </span>
+
+        <h2>
+            Study smarter in three steps.
+        </h2>
+
+    </div>
+
+
+    <div class="steps">
+
+
+        <div class="step">
+
+            <div class="step-number">
+                01
+            </div>
+
+            <h3>
+                Upload
+            </h3>
+
+            <p>
+                Upload your lecture notes,
+                PDF, slides or document.
+            </p>
+
+        </div>
+
+
+        <div class="step">
+
+            <div class="step-number">
+                02
+            </div>
+
+            <h3>
+                Generate
+            </h3>
+
+            <p>
+                Atomik analyzes your material
+                and creates practice questions.
+            </p>
+
+        </div>
+
+
+        <div class="step">
+
+            <div class="step-number">
+                03
+            </div>
+
+            <h3>
+                Practice
+            </h3>
+
+            <p>
+                Take your quiz, check your score
+                and identify what you need to revise.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================
+     PRICING
+========================================= -->
+
+<section
+    id="pricing"
+    class="pricing-section"
+>
+
+    <div class="section-heading">
+
+        <span class="section-label">
+            SUBSCRIPTION
+        </span>
+
+        <h2>
+            Study without limits.
+        </h2>
+
+        <p>
+            Generate as many quizzes as you need.
+        </p>
+
+    </div>
+
+
+    <div class="pricing-container">
+
+
+        <!-- MONTHLY -->
+
+        <div class="price-card">
+
+            <div class="price-header">
+
+                <h3>
+                    Monthly
+                </h3>
+
+                <p>
+                    For students who study regularly.
+                </p>
+
+            </div>
+
+
+            <div class="price">
+
+                <span>
+                    ₦
+                </span>
+
+                1,500
+
+                <small>
+                    /month
+                </small>
+
+            </div>
+
+
+            <ul>
+
+                <li>
+                    ✓ Unlimited quiz generation
+                </li>
+
+                <li>
+                    ✓ PDF & document uploads
+                </li>
+
+                <li>
+                    ✓ Multiple difficulty levels
+                </li>
+
+                <li>
+                    ✓ No generation limits
+                </li>
+
+            </ul>
+
+
+<button
+    class="subscribe-button"
+    data-plan="monthly"
+>
+    Subscribe — ₦1,500/month
+</button>
+        </div>
+
+
+        <!-- YEARLY -->
+
+        <div class="price-card featured">
+
+            <div class="popular">
+                BEST VALUE
+            </div>
+
+
+            <div class="price-header">
+
+                <h3>
+                    Yearly
+                </h3>
+
+                <p>
+                    For serious students. (Scholars 😏)
+                </p>
+
+            </div>
+
+
+            <div class="price">
+
+                <span>
+                    ₦
+                </span>
+
+                10,000
+
+                <small>
+                    /year
+                </small>
+
+            </div>
+
+
+            <div class="saving">
+                Save ₦8,000
+            </div>
+
+
+            <ul>
+
+                <li>
+                    ✓ Unlimited quiz generation
+                </li>
+
+                <li>
+                    ✓ PDF & document uploads
+                </li>
+
+                <li>
+                    ✓ Multiple difficulty levels
+                </li>
+
+                <li>
+                    ✓ No generation limits
+                </li>
+
+                <li>
+                    ✓ Priority features
+                </li>
+
+            </ul>
+
+
+<button
+    class="subscribe-button"
+    data-plan="yearly"
+>
+    Get Yearly Plan
+</button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================
+     FOOTER
+========================================= -->
+
+<footer>
+
+    <div class="footer-logo">
+        ⚛ Atomik
+    </div>
+
+    <p>
+        Learn more. Practice better.
+        Become more.
+    </p>
+
+    <small>
+        © 2026 Atomik Quiz Generator
+    </small>
+
+</footer>
+
+</main><script
+    type="module"
+    src="app.js"
+></script></body></html>
