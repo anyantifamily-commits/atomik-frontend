@@ -24,7 +24,28 @@ const forgotPassword =
    REDIRECT
 ================================ */
 
+/*
+   Atomik is hosted inside the
+   /atomik-frontend/ GitHub Pages folder.
+
+   Keep this relative because auth.html
+   and index.html are in the same folder.
+*/
+
 const HOME_PAGE = "index.html";
+
+
+/*
+   This is the actual deployed
+   authentication page.
+
+   Do NOT use window.location.origin
+   here because that would remove
+   /atomik-frontend/.
+*/
+
+const AUTH_REDIRECT_URL =
+    "https://anyantifamily-commits.github.io/atomik-frontend/auth.html";
 
 
 /* ================================
@@ -416,9 +437,15 @@ signupForm.addEventListener(
                             name: name
                         },
 
+                        /*
+                           IMPORTANT:
+                           Use the full deployed
+                           GitHub Pages path.
+                        */
+
                         emailRedirectTo:
-                            window.location.origin +
-                            "/auth.html"
+                            AUTH_REDIRECT_URL
+
                     }
 
                 });
@@ -629,9 +656,13 @@ forgotPassword.addEventListener(
                     .resetPasswordForEmail(
                         email,
                         {
+                            /*
+                               Use the full deployed
+                               GitHub Pages path.
+                            */
+
                             redirectTo:
-                                window.location.origin +
-                                "/auth.html"
+                                AUTH_REDIRECT_URL
                         }
                     );
 
